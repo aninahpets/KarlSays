@@ -41,4 +41,3 @@ def get_restaurant(neighborhood):
 	return businesses
 
 	# What info do we want to get from businesses 
-get_restaurant('Nob Hill')

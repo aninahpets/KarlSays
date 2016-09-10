@@ -28,7 +28,7 @@ def check_if_raining():
     #return True or False
 
     # if  function returns TRUE, call YELP API to stay indoors
-    # if function returns FALSE, call Parks API to stay outdoors
+    # if function returns FALSE, query db to stay outdoors
     return rain
 
 def get_restaurant(neighborhood):

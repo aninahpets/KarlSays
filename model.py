@@ -67,9 +67,11 @@ class Park(db.Model):
 
     __tablename__ = 'parks'
 
-    park_name = db.Column(db.String, unique=True, nullable=False, primary_key=True)
-    latitude = db.Column(db.Float)
-    longitude = db.Column(db.Float)
+    park_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    park_name = db.Column(db.String, nullable=False)
+    latitude = db.Column(db.Float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
+    neighborhood = db.Column(db.String, nullable=False)
 
 
 def connect_to_db(app, db_uri='postgresql:///karlsays'):

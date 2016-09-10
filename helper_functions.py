@@ -111,4 +111,7 @@ def get_rainy_activity(neighborhood,outing_type):
 # date = get_rainy_activity('Nob Hill', 'date')
 
 
-
+def get_sunny_activity(neighborhood):
+    """Queries database to get a park for a sunny day outing"""
+    park = db.session.query(Park).filter_by(neighborhood=neighborhood).first()
+    return park.json

@@ -18,13 +18,16 @@ def load_parks():
     # Read u.park file and insert data
     for row in open("park_data/u.park.csv"):
 
-        park_name, latitude, longitude = row.split(",")
+        park_name, latitude, longitude, neighborhood = row.split(",")
         latitude = float(latitude)
         longitude = float(longitude)
+        # str(neighborhood).replace('\r', '')
+        neighborhood = neighborhood[:-2]
 
         park = Park(park_name=park_name,
                     latitude=latitude,
-                    longitude=longitude)
+                    longitude=longitude,
+                    neighborhood=neighborhood)
 
         db.session.add(park)
 

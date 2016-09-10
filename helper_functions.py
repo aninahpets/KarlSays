@@ -32,15 +32,14 @@ def check_if_raining():
     return rain
 
 def get_restaurant(neighborhood):
-    ''' Makes Yelp API call to retrieve a restaurant.'''
-
+	''' Makes Yelp API call to retrieve a restaurant.'''
 	# Authentication steps needed to make Yelp API call
 	app_id = os.environ.get("YELP_TOKEN")
 	app_secret = os.environ.get("YELP_SECRET")
 
 	payload = {'grant_type':'client_credentials',
-			   'client_id':app_id,
-			   'client_secret':app_secret}
+				   'client_id':app_id,
+				   'client_secret':app_secret}
 	r = requests.post('https://api.yelp.com/oauth2/token', params=payload).json()
 
 	token = r['access_token']
@@ -65,3 +64,48 @@ def get_restaurant(neighborhood):
 	return businesses
 
 	# What info do we want to get from businesses 
+def get_rainy_activity(neighborhood,outing_type):
+	''' Makes Yelp API call to retrieve an indoor activity if raining.'''
+	app_id = os.environ.get("YELP_TOKEN")
+	app_secret = os.environ.get("YELP_SECRET")
+
+	payload = {'grant_type':'client_credentials',
+			   'client_id':app_id,
+			   'client_secret':app_secret}
+	r = requests.post('https://api.yelp.com/oauth2/token', params=payload).json()
+
+	token = r['access_token']
+
+	headers = {}
+	headers['Authorization'] = 'Bearer ' + str(token)
+
+	# if outing_type == 'group':
+	# 	category = ['aquariums', 'arcades', 'galleries', 'jazzandblues', 'artmuseums',
+	# 				'observatories', 'planetarium', 'bars', 'comedyclubs', 'nightlife']
+	# elif outing_type == 'date':
+	# 	category = ['aquariums', 'arcades,' 'galleries', 'jazzandblues', 'artmuseums',
+	# 				'observatories', 'planetarium', 'bars', 'comedyclubs', 'musicvenues',
+	# 				'nightlife']
+	# elif outing_type == 'solo':
+	# 	category = [aquariums, arcades, galleries, jazzandblues, artmuseums,
+	# 				observatories, planetarium, bars, comedyclubs, musicvenues]
+	# elif outing_type == 'family':
+	# 	category = [aquariums, arcades, galleries, jazzandblues, museums,
+	# 				observatories, planetarium]
+	# Modify with search params for Yelp call
+	search = {}
+	search['location'] = neighborhood
+	search['open_now'] = True
+	search['categories'] = 'aquariums'
+
+	# Yelp API call. Input is search terms, output is a list of businesses 
+	url = 'https://api.yelp.com/v3/businesses/search?'
+	response = requests.get(url,headers=headers,params=search)
+
+	# Saves list of businesses from Yelp API call
+	businesses = response.json()
+
+	print businesses
+	return businesses
+
+get_rainy_activity('Nob Hill', 'date')

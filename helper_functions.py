@@ -12,12 +12,13 @@ def get_restaurant(neighborhood):
 
 	# Authentication steps needed to make Yelp API call
 	app_id = os.environ.get("YELP_TOKEN")
-	app_secret = os.environ.get("YELP_APP_SECRET")
+	app_secret = os.environ.get("YELP_SECRET")
 
 	payload = {'grant_type':'client_credentials',
 			   'client_id':app_id,
 			   'client_secret':app_secret}
 	r = requests.post('https://api.yelp.com/oauth2/token', params=payload).json()
+
 	token = r['access_token']
 
 	headers = {}

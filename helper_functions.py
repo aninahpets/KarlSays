@@ -2,10 +2,35 @@ import os
 import pdb
 import yelp
 import requests
+from pyowm import OWM
 from model import User, connect_to_db, db
 from random import randrange
 from flask import Flask, render_template, redirect, request, flash, session
 from flask_sqlalchemy import SQLAlchemy
+
+def check_if_raining():
+
+    ''' Makes Open Weather Map API call to check whether it's raining.
+
+        Returns a boolean: TRUE for indoors, FALSE for outdoors '''
+
+    #WEATHER_API_KEY = os.environ.get("key name in secrets.sh")
+    WEATHER_API_KEY = 'a9596ac08b30341d77766fea2be2a836'
+    owm = OWM(WEATHER_API_KEY)
+
+    # Daily weather forecast just for the next 1 days over San Francisco
+    fc = owm.daily_forecast('San Francisco County,us', limit=1)
+
+    #forecast object, with all of the info about weather forcast
+    f = fc.get_forecast()
+
+    # Will it rain
+    rain = fc.will_have_rain()
+    #return True or False
+
+    # if  function returns TRUE, call YELP API to stay indoors
+    # if function returns FALSE, call Parks API to stay outdoors
+    return rain
 
 def get_restaurant(neighborhood):
 	''' Makes Yelp API call to retrieve a restaurant.'''

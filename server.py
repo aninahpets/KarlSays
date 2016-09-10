@@ -11,15 +11,6 @@ from helper_functions import *
 app = Flask(__name__)
 app.secret_key = 'secret_key'
 
-# instantiating AuthorizationCodeGrant object for use with Uber methods
-# across the app
-uber_auth_flow = AuthorizationCodeGrant(
-    os.environ['uber_client_id'],
-    ['request'],
-    os.environ['uber_client_secret'],
-    'http://localhost:5000/callback',
-    )
-
 @app.route('/')
 def index():
     """Checks for user login and returns homepage or login template."""

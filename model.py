@@ -14,10 +14,11 @@ class User(db.Model):
     username = db.Column(db.String(75), unique=True, nullable=False)
     password = db.Column(db.String(75), nullable=False)
 
+
     @classmethod
-    def log_user_in(cls, email, password):
+    def log_user_in(cls, username, password):
         # retrieves user object from database
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(username=username).first()
         if user == None:
             return False
 
@@ -42,13 +43,13 @@ class User(db.Model):
         flash('You are now logged out.')
 
     @classmethod
-    def create_user(cls, email, password):
+    def create_user(cls, username, password):
 
         # hash and salt user pw
         password = bcrypt.hashpw(password, bcrypt.gensalt())
 
         # create new user record and add to database
-        new_user = User(email=email, password=password)
+        new_user = User(username=username, password=password)
         db.session.add(new_user)
         db.session.commit()
 
@@ -60,12 +61,18 @@ class User(db.Model):
             return True
         return False
 
+def connect_to_db(app, db_uri='postgresql:///karlsays'):
+    """Connect the database to the Flask app."""
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
+
 
 if __name__ == '__main__':
     # If this file is run interactively, you will be able to interact directly
     # with the database
     from server import app
     connect_to_db(app)
-
-
     

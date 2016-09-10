@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 def get_restaurant(neighborhood):
 	''' Makes Yelp API call to retrieve a restaurant.'''
-	pdb.set_trace()
+
 	# Authentication steps needed to make Yelp API call
 	app_id = os.environ.get("YELP_TOKEN")
 	app_secret = os.environ.get("YELP_APP_SECRET")

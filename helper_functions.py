@@ -2,6 +2,7 @@ import os
 import pdb
 import yelp
 import requests
+import random
 from pyowm import OWM
 from model import User, connect_to_db, db
 from random import randrange
@@ -32,15 +33,14 @@ def check_if_raining():
     return rain
 
 def get_restaurant(neighborhood):
-    ''' Makes Yelp API call to retrieve a restaurant.'''
-
+	''' Makes Yelp API call to retrieve a restaurant.'''
 	# Authentication steps needed to make Yelp API call
 	app_id = os.environ.get("YELP_TOKEN")
 	app_secret = os.environ.get("YELP_SECRET")
 
 	payload = {'grant_type':'client_credentials',
-			   'client_id':app_id,
-			   'client_secret':app_secret}
+				   'client_id':app_id,
+				   'client_secret':app_secret}
 	r = requests.post('https://api.yelp.com/oauth2/token', params=payload).json()
 
 	token = r['access_token']
@@ -65,3 +65,50 @@ def get_restaurant(neighborhood):
 	return businesses
 
 	# What info do we want to get from businesses 
+def get_rainy_activity(neighborhood,outing_type):
+	''' Makes Yelp API call to retrieve an indoor activity if raining.'''
+	app_id = os.environ.get("YELP_TOKEN")
+	app_secret = os.environ.get("YELP_SECRET")
+
+	payload = {'grant_type':'client_credentials',
+			   'client_id':app_id,
+			   'client_secret':app_secret}
+	r = requests.post('https://api.yelp.com/oauth2/token', params=payload).json()
+
+	token = r['access_token']
+
+	headers = {}
+	headers['Authorization'] = 'Bearer ' + str(token)
+
+	# Pre determined Yelp categories correlating to outing_type
+	categories = {'group': ['active,aquariums', 'arts,arcades', 'arts,galleries', 'arts,jazzandblues', 'arts,museums,artmuseums','arts,observatories', 'arts,planetarium', 'nightlife,bars', 'nightlife,comedyclubs'],
+				  'date' : ['active,aquariums', 'arts,arcades', 'arts,galleries', 'arts,jazzandblues', 'arts,museums,artmuseums','arts,observatories', 'arts,planetarium', 'nightlife,bars', 'nightlife,comedyclubs', 'nightlife,musicvenues'],
+				  'solo':['active,aquariums', 'arts,arcades', 'arts,galleries', 'arts,jazzandblues', 'artmuseums','arts,observatories', 'arts,planetarium', 'nightlife,bars', 'nightlife,comedyclubs'],
+				  'family': ['active,aquariums', 'arts,arcades', 'arts,galleries', 'arts,museums','arts,observatories', 'arts,planetarium']
+				 }
+
+	category_choices = categories[outing_type]
+	category = random.choice(category_choices)
+
+
+	# Modify with search params for Yelp call
+	search = {}
+	search['location'] = neighborhood
+	search['open_now'] = True
+	search['categories'] = category
+	search['radius'] = 804
+
+
+	# Yelp API call. Input is search terms, output is a list of businesses 
+	url = 'https://api.yelp.com/v3/businesses/search?'
+	response = requests.get(url,headers=headers,params=search)
+
+	# Saves list of businesses from Yelp API call
+	businesses = response.json()
+
+	return businesses
+
+# date = get_rainy_activity('Nob Hill', 'date')
+
+
+

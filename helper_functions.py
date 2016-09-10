@@ -14,8 +14,7 @@ def check_if_raining():
 
         Returns a boolean: TRUE for indoors, FALSE for outdoors '''
 
-    #WEATHER_API_KEY = os.environ.get("key name in secrets.sh")
-    WEATHER_API_KEY = 'a9596ac08b30341d77766fea2be2a836'
+    WEATHER_API_KEY = os.environ.get('WEATHER_TOKEN')
     owm = OWM(WEATHER_API_KEY)
 
     # Daily weather forecast just for the next 1 days over San Francisco
@@ -33,7 +32,7 @@ def check_if_raining():
     return rain
 
 def get_restaurant(neighborhood):
-	''' Makes Yelp API call to retrieve a restaurant.'''
+    ''' Makes Yelp API call to retrieve a restaurant.'''
 
 	# Authentication steps needed to make Yelp API call
 	app_id = os.environ.get("YELP_TOKEN")

@@ -62,12 +62,26 @@ def logout():
     User.log_user_out()
     return #render login modal again
 
-
 ################################################
 # App functionality routes
 
+@app.route('/adventure_submit.json', methods=['POST'])
+def submit_adventure():
+    """Gets the outing_type and neighborhood from front end"""
+    """Calls the function to check if rainy, then calls Yelp function for restaraunt, then rainy or sunny activity"""
+    outing_type = request.form.get('outing_type')
+    neighborhood = request.form.get('neighborhood')
+    if check_if_raining():
+        activity_location = get_rainy_activity(neighborhood,outing_type)
+    else:
+        activity_location = get_sunny_activity(neighborhood)
+    restaurant_location = get_restaurant(neighborhood)
 
-if __name__ == '__main__': # pragma: no cover
+    return activity_location, restaurant_location
+    # RETURNS JSON OBJECTS!
+
+
+if __name__ == '__main__':
    
     app.debug = True
    

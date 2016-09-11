@@ -23,44 +23,44 @@ def index():
 ################################################
 # User management routes
 
-@app.route('/login')
-def login():
-    """Provides user login form."""
-    # checks to see if user logged in; redirect to homepage if so
-    if 'user_id' in session:
-        return #ok to render homepage
-    else:
-        return #render login modal again
+# @app.route('/login')
+# def login():
+#     """Provides user login form."""
+#     # checks to see if user logged in; redirect to homepage if so
+#     if 'user_id' in session:
+#         return #ok to render homepage
+#     else:
+#         return #render login modal again
 
 
-@app.route('/login_submit', methods=['POST'])
-def submit_login():
-    """Logs user in to app."""
-    # gets username and pw from login form
-    pdb.set_trace()
-    username = request.form.get('email')
-    password = request.form.get('password')
+# @app.route('/login_submit', methods=['POST'])
+# def submit_login():
+#     """Logs user in to app."""
+#     # gets username and pw from login form
+#     pdb.set_trace()
+#     username = request.form.get('email')
+#     password = request.form.get('password')
 
-    # retrieves user object from database
-    if User.log_user_in(username, password):
-        return #ok to render homepage
-    return #render login modal again
+#     # retrieves user object from database
+#     if User.log_user_in(username, password):
+#         return #ok to render homepage
+#     return #render login modal again
 
-@app.route('/register', methods=['POST'])
-def register():
-    """Registers user as a user of the app."""
-    username = request.form.get('email')
-    password = request.form.get('password')
-    User.create_user(username, password)
+# @app.route('/register', methods=['POST'])
+# def register():
+#     """Registers user as a user of the app."""
+#     username = request.form.get('email')
+#     password = request.form.get('password')
+#     User.create_user(username, password)
 
-    return redirect('/')
+#     return redirect('/')
 
 
-@app.route('/logout')
-def logout():
-    """Logs user out of app."""
-    User.log_user_out()
-    return #render login modal again
+# @app.route('/logout')
+# def logout():
+#     """Logs user out of app."""
+#     User.log_user_out()
+#     return #render login modal again
 
 ################################################
 # App functionality routes

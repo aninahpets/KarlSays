@@ -15,8 +15,9 @@ app.secret_key = 'secret_key'
 def index():
     """Checks for user login and returns homepage or login template."""
     # checks to see if user logged in; redirects to login if not
-    if User.user_logged_in():
-        return render_template('index.html')
+    # if User.user_logged_in():
+    print "AT ROUTE"
+    return render_template('index.html')
     # else:
     #     return render_template('login.html')
 
@@ -93,5 +94,5 @@ if __name__ == '__main__':
    
     # DebugToolbarExtension(app)
 
-    # app.run(host='0.0.0.0', port=5000)
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
+    # app.run()

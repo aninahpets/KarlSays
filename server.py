@@ -62,6 +62,11 @@ def logout():
     User.log_user_out()
     return #render login modal again
 
+@app.route('/adventure_submit', methods=['POST'])
+def submit_adventure():
+    """Gets the outing_type and neighborhood from front end"""
+    """Calls the function to check if rainy, then calls Yelp function for restaraunt, then rainy or sunny activity"""
+    pass
 
 ################################################
 # App functionality routes

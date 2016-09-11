@@ -11,7 +11,7 @@ class User(db.Model):
     __tablename__ = 'users'
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    username = db.Column(db.String(75), unique=True, nullable=False)
+    username = db.Column(db.String(75), unique=True, nullable=False, primary_key=True)
     password = db.Column(db.String(75), nullable=False)
 
 
@@ -60,6 +60,19 @@ class User(db.Model):
         if 'user_id' in session:
             return True
         return False
+
+
+class Park(db.Model):
+    """Parks in SF."""
+
+    __tablename__ = 'parks'
+
+    park_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    park_name = db.Column(db.String, nullable=False)
+    latitude = db.Column(db.Float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
+    neighborhood = db.Column(db.String, nullable=False)
+
 
 def connect_to_db(app, db_uri='postgresql:///karlsays'):
     """Connect the database to the Flask app."""

@@ -37,6 +37,7 @@ def login():
 def submit_login():
     """Logs user in to app."""
     # gets username and pw from login form
+    pdb.set_trace()
     username = request.form.get('email')
     password = request.form.get('password')
 

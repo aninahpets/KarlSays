@@ -4,14 +4,36 @@
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
    <link rel="stylesheet" href="bootstrap-styles.css">
+
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans" rel="stylesheet">
 	<title>Karl Says...</title>
+
+  <style>
+  body {
+        background: url('https://hd.unsplash.com/photo-1470204901966-f23336e57278') right top;
+        background-size: cover;
+        margin:auto;
+        font-family: 'Open Sans', sans-serif;
+    }
+  </style>
 </head>
+
+
 <body>
 
 <style>
-  header { text-align: center; padding: 25px; }
+  header { text-align: center; padding: 25px; font-family: 'Fredoka One', cursive; }
   .login, .register { border: solid 2px black; padding: 10px; margin: 10px; text-align: center;}
   .login_register_wrap { text-align: center;}
+
+  h1 { font-size: 9em; color: white;}
+
+  h4 { font-size: 3em; color: #EF5350;}
+
+  h1, h4 { font-family: 'Fredoka One', cursive; }
+
+  
 </style>
 
 
@@ -20,6 +42,7 @@
   </header>
 <!-- Log in and register form container -->
 <div class="container">
+<div class='login_form'>
 <form class="form-horizontal" action='/login_submit' role="form" method='POST'>
 	<h4>LOG IN</h4>
   <div class="form-group">
@@ -40,7 +63,9 @@
     </div>
   </div>
 </form>
+</div>
 
+<div class='register_form'>
 <form class="form-horizontal" action='/register' role="form" method='POST'>
 	<h4>REGISTRATION</h4>
   <div class="form-group">
@@ -61,6 +86,7 @@
     </div>
   </div>
 </form>
+</div>
 </div>
 
 <!-- Log in and register form container END-->
@@ -97,43 +123,7 @@
 <!-- Group Size container END -->
 
 <style>
-<<<<<<< HEAD
 .hood { text-align: center;}
-=======
-  <div class='container-fluid group_wrap'>
-   <div class='col-md-12'>
-  	<div class='row'>
-	  <div class="col-md-6 group" id='group-btn'><img src="..." class="img-responsive" class="img-rounded"></div>
-	  <div class="col-md-6 group" id='solo-btn'><img src="..." class="img-responsive" class="img-rounded"></div>
-	</div>
-   </div>
-	<div class='row'>
-	  <div class='col-md-12'>
-		<div class="col-md-6 group" id='date-btn'><img src="..." class="img-responsive" class="img-rounded"></div>
-		<div class="col-md-6 group" id='family-btn'><img src="..." class="img-responsive" class="img-rounded"></div>
-	</div>
-	</div>
-	</div>
-  </div>
-<!-- Group Size container END -->
-
-<!-- Loading gif container -->
-
-<!-- Loading gif container -->
-
-<!-- Neighborhood container END -->
-
-
-
-
-
-
-<!-- Show activity container -->
-
-<!-- Show activity container END-->
-
->>>>>>> 1d96cc0eeafa0f0b9bc060fb0968b78597760da0
->>>>>>> ee4826f43f873d3d21ca287df0a0448e0cf37c8a
 
 </style>
 <!-- Neighborhood container -->
@@ -180,24 +170,41 @@
 <!-- Neighborhood container END -->
 
 
-<!-- Loading gif container -->
-
-<div class='loading' style='visibility:hidden;'>
-	<img src='static/bridge.gif'/>'
-</div>
-
-<!-- Loading gif container -->
-
 <style>
-
+	h1 { text-align: center;}
 </style>
 
 <!-- Show activity container -->
 
-
+<div class='container'>
+  <div class='row' id='result'>
+        <div id="food" class="col-md-6">
+            <h1>FOOD</h1>
+            <pre><a id ="food_url" href="">
+                <div id="food_info"></div>
+            </a></pre>
+        </div>
+        
+        <div id="outing" class="col-md-6">
+            <h1>YUM</h1>
+            <pre><a id="outing_url" href="">
+            <div id="outing_info"></div>
+            </a></pre>
+        </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Show activity container END-->
+
+<!-- Loading gif container -->
+
+<div class='loading' style='visibility:hidden;'>
+	<img src='static/bridge.gif'/>
+</div>
+
+<!-- Loading gif container -->
 
 
 	<script src="static/main.js" type="text/javascript"></script>

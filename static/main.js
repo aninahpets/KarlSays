@@ -30,16 +30,9 @@ function setOutingType(evt) {
 }
 $(.outing-type).click(setOutingType);
 
-
-
-// Event handler for setting Neighborhood
-function setNeighborhood(evt) {
-	// Get value of neighborhood
-	var neighborhood = $('#neighborhood-button')
-	('data-neighborhood-type').value();
+function submitForm(evt) {
+  string = JSON.stringify(formInputs,['outing-type','neighborhood'])
 }
-$('#neighborhood-button').click(setNeighborhood);
-
 
 // Loading Gif and logic of when to display (on clicks)
 

@@ -65,6 +65,8 @@ def logout():
 ################################################
 # App functionality routes
 
+
+
 @app.route('/adventure_submit.json', methods=['POST'])
 def submit_adventure():
     """Gets the outing_type and neighborhood from front end"""

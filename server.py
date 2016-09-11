@@ -15,12 +15,10 @@ app.secret_key = 'secret_key'
 def index():
     """Checks for user login and returns homepage or login template."""
     # checks to see if user logged in; redirects to login if not
-    # if User.user_logged_in():
-    print "AT ROUTE"
-    return render_template('index.html')
-    # else:
-    #     return render_template('login.html')
-
+    if User.user_logged_in():
+        return render_template('index.html')
+    else:
+        return render_template('login.html')
 
 ################################################
 # User management routes
@@ -39,7 +37,7 @@ def login():
 def submit_login():
     """Logs user in to app."""
     # gets username and pw from login form
-    username = request.form.get('username')
+    username = request.form.get('email')
     password = request.form.get('password')
 
     # retrieves user object from database
@@ -50,11 +48,11 @@ def submit_login():
 @app.route('/register', methods=['POST'])
 def register():
     """Registers user as a user of the app."""
-    username = request.form.get('username')
+    username = request.form.get('email')
     password = request.form.get('password')
     User.create_user(username, password)
 
-    return #ok to render homepage
+    return redirect('/')
 
 
 @app.route('/logout')
@@ -83,7 +81,7 @@ def submit_adventure():
     restaurant_location = get_restaurant(neighborhood)
 
     return activity_location, restaurant_location
-    # RETURNS JSON OBJECTS
+#     # RETURNS JSON OBJECTS
 
 
 if __name__ == '__main__':

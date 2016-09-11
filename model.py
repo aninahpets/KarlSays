@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask import session, flash
 import bcrypt
+import pdb
 
 db = SQLAlchemy()
 
@@ -27,7 +28,8 @@ class User(db.Model):
             del session['user_id']
 
         # checks for password match and creates new session if successful
-        if bcrypt.checkpw(password, user.password):
+        # if bcrypt.checkpw(password, user.password):
+        if password == user.password:
         # if user.password == password:
             session['user_id'] = user.user_id
             return True
@@ -44,8 +46,8 @@ class User(db.Model):
     @classmethod
     def create_user(cls, username, password):
 
-        # hash and salt user pw
-        password = bcrypt.hashpw(password, bcrypt.gensalt())
+        # # hash and salt user pw
+        # password = bcrypt.hashpw(password, bcrypt.gensalt())
 
         # create new user record and add to database
         new_user = User(username=username, password=password)

@@ -60,6 +60,7 @@ def get_restaurant(neighborhood):
 
 	# Saves list of businesses from Yelp API call
 	businesses = response.json()['businesses']
+
 	business = random.choice(businesses)
 	restaurant = {'name': business['name'],
 	            'url':business['url'],
@@ -91,7 +92,6 @@ def get_rainy_activity(neighborhood,outing_type):
 
 	category = random.choice(categories[outing_type])
 
-
 	# Modify with search params for Yelp call
 	search = {}
 	search['location'] = neighborhood
@@ -104,17 +104,22 @@ def get_rainy_activity(neighborhood,outing_type):
 	response = requests.get(url,headers=headers,params=search)
 
 	# Saves list of businesses from Yelp API call
-	businesses = response.json()
+	businesses = response.json()['businesses']
+    business = random.choice(businesses)
+    
+    activity_location = {'name': business['name'],
+                'url':business['url'],
+                'coordinates':business['coordinates']}
 
-	return businesses
-
-# date = get_rainy_activity('Nob Hill', 'date')
+	return activity_location
 
 
 def get_sunny_activity(neighborhood):
     """Queries database to get a park for a sunny day outing"""
-    park = db.session.query(Park).filter_by(neighborhood=neighborhood).first()
-    return park.json
+
+    activity_location = db.session.query(Park).filter_by(neighborhood=neighborhood).first()
+
+    return activity_location.json
 
 
     

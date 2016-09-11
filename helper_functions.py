@@ -50,7 +50,7 @@ def get_restaurant(neighborhood):
 
 	# Modify with search params for Yelp call
 	search = {}
-	search['location'] = neighborhood
+	search['location'] = neighborhood+' San Francisco'
 	search['open_now'] = True
 	search['categories'] = 'food'
 
@@ -60,9 +60,11 @@ def get_restaurant(neighborhood):
 
 	# Saves list of businesses from Yelp API call
 	businesses = response.json()['businesses']
-
-	print businesses
-	return businesses
+	business = random.choice(businesses)
+	restaurant = {'name': business['name'],
+	            'url':business['url'],
+	            'coordinates':business['coordinates']}
+	return restaurant
 
 	# What info do we want to get from businesses 
 def get_rainy_activity(neighborhood,outing_type):

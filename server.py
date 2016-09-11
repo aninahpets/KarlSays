@@ -52,7 +52,7 @@ def register():
     password = request.form.get('password')
     User.create_user(username, password)
 
-    return render_template('index.html')
+    return redirect('/')
 
 
 @app.route('/logout')

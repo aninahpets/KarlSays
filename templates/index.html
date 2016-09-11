@@ -39,10 +39,12 @@
 
 
   <header>
-    <h1>Karl Says</h1>
+    <h1>Karl Says...</h1>
   </header>
+
+
 <!-- Log in and register form container -->
-<div class="container">
+<!-- <div class="container" style='display:hidden;'>
 <div class='login_form'>
 <form class="form-horizontal" action='/login_submit' role="form" method='POST'>
 	<h4>LOG IN</h4>
@@ -83,17 +85,17 @@
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" id="register-button" class="btn btn-default">Sign in</button>
+      <button type="submit" id="register-button" class="btn btn-default">Register</button>
     </div>
   </div>
 </form>
 </div>
 </div>
-
+ -->
 <!-- Log in and register form container END-->
 <style>
   .group_wrap {text-align:center; padding: 10px; list-style:none;}
-  button { border: solid 2px black; position: inline-block;}
+  button#group-btn, button#solo-btn, button#family-btn, button#date-btn  { border: solid 3px #EF5350; position: inline-block; color: #EF5350; background-color: transparent; font-family: 'Fredoka One', cursive;}
   .group_header{ text-align:center;}
 </style>
 
@@ -112,7 +114,7 @@
 	  </div>
 	  <div class="col-xs-12 col-md-6 col-lg-6">
 		<p>
-	  	  <button type="button" id="date-btn" class="btn btn-primary btn-lg btn-block" data-outing-type='date'>DATENITE</button>
+	  	  <button type="button" id="date-btn" class="btn btn-primary btn-lg btn-block" data-outing-type='date'>DATE NIGHT</button>
 		</p>
 		<p>
 	  	  <button type="button" id="family-btn" class="btn btn-primary btn-lg btn-block" data-outing-type='family'>FAMILY</button>
@@ -146,11 +148,19 @@
 <!-- Show activity container END-->
 
 <!-- Neighborhood container -->
+
+<style>
+select.form-control { border: solid 3px #EF5350; position: inline-block; color: #EF5350; background-color: transparent; font-family: 'Fredoka One', cursive;}
+
+
+#neighborhood-button { background-color:#EF5350; border: solid 2px #EF5350; color: white; font-weight: bold;}
+option { color: white;}
+</style>
 <div class='container'>
   <div class='row hood'>
     <div class='.col-md-12'>
-	<h4>HOOD</h4>
-	<form class='form-inline' action="/adventure_submit.json" method='POST'>
+	<h4>NEIGHBORHOOD</h4>
+	<form class='form-inline hood' method='POST'>
 		<select class="form-control input-lg">
 		  <option data-neighborhood-type='Alamo Square'>Alamo Square</option>
 		  <option data-neighborhood-type='Castro'>Castro</option>
@@ -179,7 +189,7 @@
 		  <option data-neighborhood-type='Twin Peaks'>Twin Peaks</option>
 		  <option data-neighborhood-type='Union Square'>Union Square</option>
 		</select>
-		<input type='submit' name='neighborhood-button' id='neighborhood-button' value='submit' class="btn btn-default btn-lg" />
+		<input type='submit' name='neighborhood-button' id='neighborhood-button' value='Select' class="btn btn-default btn-lg" />
 	</form>
 	</div>
 	</div>
@@ -190,7 +200,8 @@
 
 
 <style>
-	h1 { text-align: center;}
+	h4 { text-align: center;}
+  pre { background-color: transparent; border: solid 3px #EF5350; font-family: 'Fredoka One', cursive;}
 </style>
 
 <!-- Show activity container -->
@@ -198,14 +209,14 @@
 <div class='container'>
   <div class='row' id='result'>
         <div id="food" class="col-md-6">
-            <h1>FOOD</h1>
+            <h4>FOOD</h4>
             <pre><a id ="food_url" href="">
                 <div id="food_info"></div>
             </a></pre>
         </div>
         
         <div id="outing" class="col-md-6">
-            <h1>YUM</h1>
+            <h4>ACTIVITY</h4>
             <pre><a id="outing_url" href="">
             <div id="outing_info"></div>
             </a></pre>

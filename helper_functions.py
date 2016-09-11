@@ -105,9 +105,8 @@ def get_rainy_activity(neighborhood,outing_type):
 
 	# Saves list of businesses from Yelp API call
 	businesses = response.json()['businesses']
-    business = random.choice(businesses)
-    
-    activity_location = {'name': business['name'],
+	business = random.choice(businesses)
+	activity_location = {'name': business['name'],
                 'url':business['url'],
                 'coordinates':business['coordinates']}
 

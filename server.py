@@ -18,7 +18,7 @@ def index():
     if User.user_logged_in():
         return render_template('index.html')
     else:
-        return render_template('index.html')
+        return render_template('login.html')
 
 
 ################################################

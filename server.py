@@ -66,7 +66,9 @@ def logout():
 def submit_adventure():
     """Gets the outing_type and neighborhood from front end"""
     """Calls the function to check if rainy, then calls Yelp function for restaraunt, then rainy or sunny activity"""
-    pass
+    # get outing type: outing_type = request.form.get('outing_type')
+    # get neighborhood: request.form.get('neighborhood')
+    # 
 
 ################################################
 # App functionality routes

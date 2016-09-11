@@ -50,7 +50,7 @@ def get_restaurant(neighborhood):
 
 	# Modify with search params for Yelp call
 	search = {}
-	search['location'] = 'neighborhood'
+	search['location'] = neighborhood
 	search['open_now'] = True
 	search['categories'] = 'food'
 
@@ -83,12 +83,11 @@ def get_rainy_activity(neighborhood,outing_type):
 	# Pre determined Yelp categories correlating to outing_type
 	categories = {'group': ['active,aquariums', 'arts,arcades', 'arts,galleries', 'arts,jazzandblues', 'arts,museums,artmuseums','arts,observatories', 'arts,planetarium', 'nightlife,bars', 'nightlife,comedyclubs'],
 				  'date' : ['active,aquariums', 'arts,arcades', 'arts,galleries', 'arts,jazzandblues', 'arts,museums,artmuseums','arts,observatories', 'arts,planetarium', 'nightlife,bars', 'nightlife,comedyclubs', 'nightlife,musicvenues'],
-				  'solo':['active,aquariums', 'arts,arcades', 'arts,galleries', 'arts,jazzandblues', 'artmuseums','arts,observatories', 'arts,planetarium', 'nightlife,bars', 'nightlife,comedyclubs'],
+				  'solo':['active,aquariums', 'arts,arcades', 'arts,galleries', 'arts,jazzandblues', 'arts,museums,artmuseums','arts,observatories', 'arts,planetarium', 'nightlife,bars', 'nightlife,comedyclubs'],
 				  'family': ['active,aquariums', 'arts,arcades', 'arts,galleries', 'arts,museums','arts,observatories', 'arts,planetarium']
 				 }
 
-	category_choices = categories[outing_type]
-	category = random.choice(category_choices)
+	category = random.choice(categories[outing_type])
 
 
 	# Modify with search params for Yelp call
@@ -96,7 +95,6 @@ def get_rainy_activity(neighborhood,outing_type):
 	search['location'] = neighborhood
 	search['open_now'] = True
 	search['categories'] = category
-	search['radius'] = 804
 
 
 	# Yelp API call. Input is search terms, output is a list of businesses 
@@ -115,3 +113,6 @@ def get_sunny_activity(neighborhood):
     """Queries database to get a park for a sunny day outing"""
     park = db.session.query(Park).filter_by(neighborhood=neighborhood).first()
     return park.json
+
+
+    

@@ -40,7 +40,6 @@ class User(db.Model):
     def log_user_out(cls):
         # remove user session and confirm user logout
         del session['user_id']
-        flash('You are now logged out.')
 
     @classmethod
     def create_user(cls, username, password):

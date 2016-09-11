@@ -20,21 +20,37 @@ function initMap(restaurantLat, restaurantLng, activityLat, activityLng) {
         });
       }
 
-// Event listener and handler for outing_type div click]
-
 // Event listener and handler for outing_type div click
-function setOutingType(evt) {
-	// Sets outingType to be the data value of the div clicked
-	var outingType = $(this).data('data-outing-type');
-	console.log('Outing type chosen: ', outingType);
-}
-$(.outing-type).click(setOutingType);
+(function() {
 
-function submitForm(evt) {
-  string = JSON.stringify(formInputs,['outing-type','neighborhood'])
+  function setOutingType(evt) {
+      // Sets outingType to be the data value of the div clicked
+      var outingType = $(this).data('data-outing-type');
+      console.log('Outing type chosen: ', outingType);
+    }
+
+    $(.outing-type).click(setOutingType);
+    console.log($(this).data('data-neighborhood-type'));
+    console.log($(this).data('data-outing-type'));
+    function submitForm(evt) {
+      formInputs = {"neighborhood": $(this).data('data-neighborhood-type'),
+                   "outing_type": $(this).data('data-outing-type')
+                  };
+      var string = JSON.stringify(formInputs,['neighborhood','outing_type']);
+      console.log(string);
+
+
+     $.post("/adventure_submit.json",
+            formInputs,
+            displayAdventure);
+    });
+}();
+
+funtion displayAdventure(result){
+  console.log("Got an Adventure", result);
+
 }
 
 // Loading Gif and logic of when to display (on clicks)
 
 
-// Event listener and handler for Map object

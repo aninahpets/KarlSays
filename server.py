@@ -16,9 +16,9 @@ def index():
     """Checks for user login and returns homepage or login template."""
     # checks to see if user logged in; redirects to login if not
     if User.user_logged_in():
-        return #ok to render homepage
-    else:
-        return #render login modal again
+        return render_template('index.html')
+    # else:
+    #     return render_template('login.html')
 
 
 ################################################
@@ -65,6 +65,8 @@ def logout():
 ################################################
 # App functionality routes
 
+
+
 @app.route('/adventure_submit.json', methods=['POST'])
 def submit_adventure():
     """Gets the outing_type and neighborhood from front end"""
@@ -73,12 +75,14 @@ def submit_adventure():
     neighborhood = request.form.get('neighborhood')
     if check_if_raining():
         activity_location = get_rainy_activity(neighborhood,outing_type)
+        
     else:
         activity_location = get_sunny_activity(neighborhood)
+
     restaurant_location = get_restaurant(neighborhood)
 
     return activity_location, restaurant_location
-    # RETURNS JSON OBJECTS!
+    # RETURNS JSON OBJECTS
 
 
 if __name__ == '__main__':
